@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>علیرضا عیدزاده | پروفایل شخصی</title>
+
+<style>
+/* =========================================================
+   توکن‌های طراحی
+   ========================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg-primary: #0a0e14;
+  --bg-card: #10161f;
+  --border-subtle: #1e2733;
+  --accent: #2dd4bf;
+  --accent-glow: #5eead4;
+  --text-primary: #e6f1f5;
+  --text-muted: #7d8b99;
+
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius: 10px;
+  --max-width: 880px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background-color: var(--bg-primary);
+  background-image:
+    radial-gradient(circle at 15% 0%, rgba(45, 212, 191, 0.07), transparent 40%),
+    radial-gradient(circle at 85% 20%, rgba(45, 212, 191, 0.05), transparent 35%);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.7;
+}
+
+/* ---------- پس‌زمینه متحرک (شبکه نئونی) ---------- */
+#bg-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  display: block;
+  pointer-events: none;
+}
+
+.topbar, main, .footer {
+  position: relative;
+  z-index: 1;
+}
+
+h1, h2, h3 { font-family: var(--font-display); margin: 0; }
+a { color: var(--accent); text-decoration: none; }
+ul { list-style: none; margin: 0; padding: 0; }
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent-glow);
+  outline-offset: 3px;
+}
+
+/* ---------- نوار بالا ---------- */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  background: rgba(10, 14, 20, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-subtle);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.topbar__logo {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+.topbar__logo .dot { color: var(--accent); }
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 4px;
+  overflow-x: auto;
+}
+
+.tab {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  padding: 7px 14px;
+  border-radius: 6px;
+  transition: color 0.2s ease, background 0.2s ease;
+  white-space: nowrap;
+}
+.tab:hover { color: var(--text-primary); }
+.tab.is-active {
+  color: var(--bg-primary);
+  background: var(--accent);
+}
+
+/* ---------- دکمه تعویض زبان ---------- */
+.lang-switch {
+  display: flex;
+  gap: 2px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.lang-switch__btn {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.lang-switch__btn:hover { color: var(--text-primary); }
+
+.lang-switch__btn.is-active {
+  color: var(--bg-primary);
+  background: var(--accent);
+}
+
+/* ---------- هیرو / ترمینال ---------- */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 78vh;
+  padding: 60px 20px;
+}
+
+.terminal {
+  width: 100%;
+  max-width: 640px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  box-shadow: 0 0 60px rgba(45, 212, 191, 0.08);
+  overflow: hidden;
+}
+
+.terminal__bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: #0d131b;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.terminal__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #3a4552;
+}
+
+.terminal__title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-inline-start: auto;
+}
+
+.terminal__body { padding: 32px 28px 36px; text-align: start; }
+
+.terminal__line {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0 0 10px;
+}
+
+.prompt { color: var(--accent); margin-left: 8px; }
+
+.hero__name {
+  font-size: clamp(2rem, 6vw, 2.8rem);
+  color: var(--text-primary);
+  text-shadow: 0 0 24px rgba(94, 234, 212, 0.35);
+  margin: 6px 0 14px;
+}
+
+.terminal__comment { color: #4b6b63; }
+
+.hero__actions { display: flex; gap: 12px; margin-top: 26px; flex-wrap: wrap; }
+
+.btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 11px 22px;
+  border-radius: 8px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  display: inline-block;
+}
+
+.btn--primary { background: var(--accent); color: #06231f; }
+.btn--primary:hover { box-shadow: 0 0 22px rgba(45, 212, 191, 0.45); transform: translateY(-1px); }
+
+.btn--ghost { border: 1px solid var(--border-subtle); color: var(--text-primary); }
+.btn--ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ---------- بخش‌های عمومی ---------- */
+.section {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 90px 24px;
+  scroll-margin-top: 90px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent);
+  margin: 0 0 8px;
+}
+
+.section__title { font-size: clamp(1.6rem, 4vw, 2.1rem); margin-bottom: 28px; }
+
+.subsection__title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  margin: 0 0 16px;
+  color: var(--text-primary);
+}
+
+.about__text { color: var(--text-muted); max-width: 62ch; }
+
+/* ---------- چیدمان درباره من + عکس پروفایل ---------- */
+.about__layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.about__photo-frame {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--border-subtle);
+  background: var(--bg-card);
+  box-shadow: 0 0 30px rgba(45, 212, 191, 0.1);
+}
+
+.about__photo-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  color: var(--text-muted);
+}
+
+.about__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about__content { flex: 1; min-width: 240px; }
+
+.fact-list li {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+}
+
+.fact-list__marker { font-family: var(--font-mono); color: var(--accent); flex-shrink: 0; }
+
+/* ---------- کارت‌ها ---------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.card, .project-highlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  padding: 26px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover { border-color: var(--accent); transform: translateY(-3px); }
+
+.card__icon { font-size: 1.8rem; display: block; margin-bottom: 12px; }
+.card__title { font-size: 1.05rem; margin-bottom: 8px; }
+.card__text { color: var(--text-muted); font-size: 0.92rem; margin: 0; }
+.project-highlight { margin-bottom: 8px; }
+
+/* ---------- گالری هوش مصنوعی ---------- */
+.gallery-theme { margin-bottom: 48px; }
+.gallery-theme:last-child { margin-bottom: 0; }
+
+.gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.gallery__item { margin: 0; }
+
+.gallery__frame {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px dashed var(--border-subtle);
+  background: var(--bg-card);
+}
+
+.gallery__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  color: var(--text-muted);
+}
+
+.gallery__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery__item:hover .gallery__frame { border-color: var(--accent); }
+
+.gallery__caption {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+  text-align: center;
+}
+
+/* ---------- فوتر ---------- */
+.footer {
+  text-align: center;
+  padding: 40px 20px 60px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* ---------- انیمیشن ورود ---------- */
+.section, .hero {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.section.is-visible, .hero.is-visible { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .section, .hero { opacity: 1; transform: none; transition: none; }
+}
+
+/* ---------- ریسپانسیو ---------- */
+@media (max-width: 720px) {
+  .gallery__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .topbar { flex-direction: column; align-items: flex-start; }
+  .tabs { width: 100%; }
+  .terminal__body { padding: 24px 18px 28px; }
+  .section { padding: 64px 18px; }
+}
+</style>
+</head>
+<body>
+
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- ============ نوار بالای سایت ============ -->
+  <header class="topbar">
+    <div class="topbar__logo">alireza<span class="dot">.</span>dev</div>
+    <nav class="tabs">
+      <a href="#home" class="tab is-active">home.html</a>
+      <a href="#about" class="tab">about.html</a>
+      <a href="#gallery" class="tab">gallery.html</a>
+      <a href="#interests" class="tab">interests.html</a>
+      <a href="#projects" class="tab">projects.html</a>
+    </nav>
+    <div class="lang-switch">
+      <button type="button" class="lang-switch__btn is-active" data-lang="fa">فارسی</button>
+      <button type="button" class="lang-switch__btn" data-lang="en">EN</button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ صفحه اصلی (ترمینال) ============ -->
+    <section id="home" class="hero">
+      <div class="terminal">
+        <div class="terminal__bar">
+          <span class="terminal__dot"></span>
+          <span class="terminal__dot"></span>
+          <span class="terminal__dot"></span>
+          <span class="terminal__title">terminal — zsh</span>
+        </div>
+        <div class="terminal__body">
+          <p class="terminal__line"><span class="prompt">$</span> whoami</p>
+          <h1 class="hero__name" data-i18n="hero-name">علیرضا عیدزاده</h1>
+          <p class="terminal__line terminal__comment" data-i18n="hero-tagline">// علاقه‌مند به هوش مصنوعی و برنامه‌نویسی</p>
+          <div class="hero__actions">
+            <a href="#gallery" class="btn btn--primary" data-i18n="hero-btn-gallery">مشاهده گالری هوش مصنوعی</a>
+            <a href="#about" class="btn btn--ghost" data-i18n="hero-btn-about">درباره من</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ درباره من ============ -->
+    <section id="about" class="section">
+      <p class="eyebrow">// about.html</p>
+      <h2 class="section__title" data-i18n="about-title">درباره من</h2>
+
+      <div class="about__layout">
+        <div class="about__photo-frame">
+          <div class="about__photo-placeholder">+</div>
+          <img class="about__photo" src="images/profile.jpg" alt="عکس پروفایل علیرضا" onerror="this.style.display='none'">
+        </div>
+
+        <div class="about__content">
+          <p class="about__text" data-i18n="about-text">
+            سلام! من علیرضام، ۱۳ سالمه و عاشق تکنولوژی، برنامه‌نویسی و هوش مصنوعی‌ام.
+            از کدنویسی گرفته تا کاوش توی دنیای هوش مصنوعی، همه‌چیزهایی که به فناوری مربوط
+            میشن برام جذابه. علاوه بر این‌ها، عاشق فیلم دیدن، بازی کردن و ریاضی هم هستم.
+          </p>
+
+          <ul class="fact-list">
+            <li><span class="fact-list__marker">01</span> <span data-i18n="fact-1">عاشق فیلم دیدن‌ام 🎬</span></li>
+            <li><span class="fact-list__marker">02</span> <span data-i18n="fact-2">توی بازی‌های ویدیویی حسابی وقت می‌ذارم 🎮</span></li>
+            <li><span class="fact-list__marker">03</span> <span data-i18n="fact-3">ریاضی یکی از درس‌های موردعلاقمه ➗</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ گالری هوش مصنوعی ============ -->
+    <section id="gallery" class="section">
+      <p class="eyebrow">// gallery.html</p>
+      <h2 class="section__title" data-i18n="gallery-title">گالری هوش مصنوعی من 🎨</h2>
+      <p class="about__text" style="margin-bottom: 44px;" data-i18n="gallery-desc">
+        این تصویرها رو با هوش مصنوعی ساختم. برای اضافه کردن عکس جدید، فقط کافیه
+        فایلش رو با اسم مشخص‌شده توی پوشه‌ی <code>images/gallery/</code> بذاری.
+      </p>
+
+      <!-- موضوع ۱ -->
+      <div class="gallery-theme">
+        <h3 class="subsection__title" data-i18n="gallery-theme-1">خلاقیت‌های هوش مصنوعی من</h3>
+        <div class="gallery__grid">
+          <figure class="gallery__item">
+            <div class="gallery__frame">
+              <div class="gallery__placeholder">+</div>
+              <img class="gallery__img" src="images/gallery/1.png" alt="تصویر هوش مصنوعی ۱" onerror="this.style.display='none'">
+            </div>
+          </figure>
+          <figure class="gallery__item">
+            <div class="gallery__frame">
+              <div class="gallery__placeholder">+</div>
+              <img class="gallery__img" src="images/gallery/2.png" alt="تصویر هوش مصنوعی ۲" onerror="this.style.display='none'">
+            </div>
+          </figure>
+          <figure class="gallery__item">
+            <div class="gallery__frame">
+              <div class="gallery__placeholder">+</div>
+              <img class="gallery__img" src="images/gallery/3.png" alt="تصویر هوش مصنوعی ۳" onerror="this.style.display='none'">
+            </div>
+          </figure>
+        </div>
+      </div>
+
+      <!--
+        برای اضافه کردن یک موضوع جدید، این بلوک رو کپی کن و:
+        ۱. متن داخل subsection__title رو عوض کن (اسم موضوع جدید)
+        ۲. اسم فایل عکس‌ها رو با یک کلمه‌ی انگلیسی جدید (slug) بازنویسی کن
+           مثلاً: ai-art-1.png تا ai-art-4.png
+      -->
+
+    </section>
+
+    <!-- ============ علایق علمی ============ -->
+    <section id="interests" class="section">
+      <p class="eyebrow">// interests.html</p>
+      <h2 class="section__title" data-i18n="interests-title">علایق علمی من</h2>
+
+      <div class="card-grid">
+        <article class="card">
+          <span class="card__icon">🤖</span>
+          <h3 class="card__title" data-i18n="card-ai-title">هوش مصنوعی</h3>
+          <p class="card__text" data-i18n="card-ai-text">علاقه‌مند به ابزارهای اتوماسیون و ایجنت‌های هوش مصنوعی هستم و دوست دارم یاد بگیرم چطور می‌شه باهاشون کارهای هوشمند ساخت.</p>
+        </article>
+
+        <article class="card">
+          <span class="card__icon">💻</span>
+          <h3 class="card__title" data-i18n="card-prog-title">برنامه‌نویسی</h3>
+          <p class="card__text" data-i18n="card-prog-text">با پایتون و جاوااسکریپت کار می‌کنم و همیشه دنبال یاد گرفتن چیزای جدیدترم.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ پروژه‌ها ============ -->
+    <section id="projects" class="section">
+      <p class="eyebrow">// projects.html</p>
+      <h2 class="section__title" data-i18n="projects-title">پروژه‌ها</h2>
+
+      <article class="project-highlight">
+        <h3 class="card__title" data-i18n="project-highlight-title">این وبسایت 🚀</h3>
+        <p class="card__text" data-i18n="project-highlight-text">اولین پروژه‌ی منه که با HTML، CSS و JavaScript ساختمش.</p>
+      </article>
+
+      <h3 class="subsection__title" style="margin-top: 40px;" data-i18n="future-title">پروژه‌های آینده</h3>
+      <ul class="fact-list">
+        <li><span class="fact-list__marker">→</span> <span data-i18n="future-1">ساخت یه ایجنت هوش مصنوعی ساده برای انجام خودکار یه کار</span></li>
+        <li><span class="fact-list__marker">→</span> <span data-i18n="future-2">ساخت یه ابزار اتوماسیون با هوش مصنوعی</span></li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p data-i18n="footer-text">ساخته شده با ❤️ توسط علیرضا عیدزاده</p>
+  </footer>
+
+<script>
+  // ۱. هایلایت تب فعال بر اساس بخش دیده‌شده
+  const sections = document.querySelectorAll('section[id]');
+  const tabs = document.querySelectorAll('.tab');
+
+  function setActiveTab(id) {
+    tabs.forEach((tab) => {
+      tab.classList.toggle('is-active', tab.getAttribute('href') === `#${id}`);
+    });
+  }
+
+  const tabObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) setActiveTab(entry.target.id);
+      });
+    },
+    { rootMargin: '-40% 0px -55% 0px' }
+  );
+  sections.forEach((section) => tabObserver.observe(section));
+
+  // ۲. انیمیشن fade-in هنگام اسکرول
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+  document.querySelectorAll('.section, .hero').forEach((el) => revealObserver.observe(el));
+
+  // ۳. صفحه اصلی همیشه از ابتدا نمایان باشه
+  window.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('.hero')?.classList.add('is-visible');
+  });
+
+  // ۴. سیستم دوزبانه (فارسی / انگلیسی)
+  (function () {
+    const translations = {
+      'hero-name': { fa: 'علیرضا عیدزاده', en: 'Alireza Eidzadeh' },
+      'hero-tagline': { fa: '// علاقه‌مند به هوش مصنوعی و برنامه‌نویسی', en: '// Passionate about AI and programming' },
+      'hero-btn-gallery': { fa: 'مشاهده گالری هوش مصنوعی', en: 'View AI Gallery' },
+      'hero-btn-about': { fa: 'درباره من', en: 'About Me' },
+      'about-title': { fa: 'درباره من', en: 'About Me' },
+      'about-text': {
+        fa: 'سلام! من علیرضام، ۱۳ سالمه و عاشق تکنولوژی، برنامه‌نویسی و هوش مصنوعی‌ام. از کدنویسی گرفته تا کاوش توی دنیای هوش مصنوعی، همه‌چیزهایی که به فناوری مربوط میشن برام جذابه. علاوه بر این‌ها، عاشق فیلم دیدن، بازی کردن و ریاضی هم هستم.',
+        en: 'Hi! I\'m Alireza, I\'m 13 years old, and I\'m passionate about technology, programming, and AI. From coding to exploring the world of artificial intelligence, anything tech-related fascinates me. I also love watching movies, gaming, and math.',
+      },
+      'fact-1': { fa: 'عاشق فیلم دیدن‌ام 🎬', en: 'I love watching movies 🎬' },
+      'fact-2': { fa: 'توی بازی‌های ویدیویی حسابی وقت می‌ذارم 🎮', en: 'I spend a lot of time gaming 🎮' },
+      'fact-3': { fa: 'ریاضی یکی از درس‌های موردعلاقمه ➗', en: 'Math is one of my favorite subjects ➗' },
+      'gallery-title': { fa: 'گالری هوش مصنوعی من 🎨', en: 'My AI Gallery 🎨' },
+      'gallery-desc': {
+        fa: 'این تصویرها رو با هوش مصنوعی ساختم. برای اضافه کردن عکس جدید، فقط کافیه فایلش رو با اسم مشخص‌شده توی پوشه‌ی <code>images/gallery/</code> بذاری.',
+        en: 'I created these images using AI. To add a new photo, just place the file with the correct name in the <code>images/gallery/</code> folder.',
+      },
+      'gallery-theme-1': { fa: 'خلاقیت‌های هوش مصنوعی من', en: 'My AI Creations' },
+      'interests-title': { fa: 'علایق علمی من', en: 'My Science Interests' },
+      'card-ai-title': { fa: 'هوش مصنوعی', en: 'Artificial Intelligence' },
+      'card-ai-text': {
+        fa: 'علاقه‌مند به ابزارهای اتوماسیون و ایجنت‌های هوش مصنوعی هستم و دوست دارم یاد بگیرم چطور می‌شه باهاشون کارهای هوشمند ساخت.',
+        en: 'I\'m interested in automation tools and AI agents, and I love learning how to build smart tools with them.',
+      },
+      'card-prog-title': { fa: 'برنامه‌نویسی', en: 'Programming' },
+      'card-prog-text': {
+        fa: 'با پایتون و جاوااسکریپت کار می‌کنم و همیشه دنبال یاد گرفتن چیزای جدیدترم.',
+        en: 'I work with Python and JavaScript, and I\'m always looking to learn new things.',
+      },
+      'projects-title': { fa: 'پروژه‌ها', en: 'Projects' },
+      'project-highlight-title': { fa: 'این وبسایت 🚀', en: 'This Website 🚀' },
+      'project-highlight-text': {
+        fa: 'اولین پروژه‌ی منه که با HTML، CSS و JavaScript ساختمش.',
+        en: 'My first project, built with HTML, CSS, and JavaScript.',
+      },
+      'future-title': { fa: 'پروژه‌های آینده', en: 'Future Projects' },
+      'future-1': {
+        fa: 'ساخت یه ایجنت هوش مصنوعی ساده برای انجام خودکار یه کار',
+        en: 'Building a simple AI agent to automate a task',
+      },
+      'future-2': { fa: 'ساخت یه ابزار اتوماسیون با هوش مصنوعی', en: 'Building an AI-powered automation tool' },
+      'footer-text': { fa: 'ساخته شده با ❤️ توسط علیرضا عیدزاده', en: 'Made with ❤️ by Alireza Eidzadeh' },
+    };
+
+    const elements = document.querySelectorAll('[data-i18n]');
+    const langButtons = document.querySelectorAll('.lang-switch__btn');
+
+    function setLanguage(lang) {
+      elements.forEach((el) => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[key]) {
+          el.innerHTML = translations[key][lang];
+        }
+      });
+
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
+
+      langButtons.forEach((btn) => {
+        btn.classList.toggle('is-active', btn.getAttribute('data-lang') === lang);
+      });
+    }
+
+    langButtons.forEach((btn) => {
+      btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang')));
+    });
+  })();
+
+  // ۵. پس‌زمینه متحرک: شبکه‌ی نودها و خطوط نئونی
+  (function () {
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const ACCENT = '45, 212, 191'; // مقدار RGB معادل با --accent سایت
+    const LINK_DISTANCE = 150;     // بیشترین فاصله‌ای که بین دو نود خط کشیده میشه
+    let width, height, particles, animationId;
+
+    function getParticleCount() {
+      // تعداد نودها بر اساس عرض صفحه (کمتر روی موبایل، برای کارایی بهتر)
+      return Math.round((width * height) / 22000);
+    }
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+
+    function createParticles() {
+      const count = getParticleCount();
+      particles = Array.from({ length: count }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.25,
+        vy: (Math.random() - 0.5) * 0.25,
+      }));
+    }
+
+    function step() {
+      ctx.clearRect(0, 0, width, height);
+
+      // به‌روزرسانی موقعیت و رسم نودها
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x <= 0 || p.x >= width) p.vx *= -1;
+        if (p.y <= 0 || p.y >= height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 1.8, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${ACCENT}, 0.55)`;
+        ctx.fill();
+      }
+
+      // رسم خط بین نودهای نزدیک به هم (ساختار مثلثی)
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < LINK_DISTANCE) {
+            const opacity = (1 - dist / LINK_DISTANCE) * 0.35;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(${ACCENT}, ${opacity})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      }
+
+      animationId = requestAnimationFrame(step);
+    }
+
+    function start() {
+      resize();
+      createParticles();
+      if (prefersReducedMotion) {
+        step(); // فقط یک فریم ثابت، بدون انیمیشن پیوسته
+      } else {
+        step();
+      }
+    }
+
+    // وقتی تب مرورگر مخفیه، انیمیشن رو متوقف کن تا باتری/CPU هدر نره
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        cancelAnimationFrame(animationId);
+      } else if (!prefersReducedMotion) {
+        step();
+      }
+    });
+
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        resize();
+        createParticles();
+      }, 200);
+    });
+
+    start();
+  })();
+</script>
+
+</body>
+</html>
