@@ -323,6 +323,27 @@ a:focus-visible, button:focus-visible {
 .card__text { color: var(--text-muted); font-size: 0.92rem; margin: 0; }
 .project-highlight { margin-bottom: 8px; }
 
+/* ---------- ویدیوی آپارات ---------- */
+.video-frame {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  padding: 10px;
+  overflow: hidden;
+}
+
+.video-frame > div {
+  border-radius: calc(var(--radius) - 4px);
+  overflow: hidden;
+}
+
+.video-frame iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: none;
+  display: block;
+}
+
 /* ---------- گالری هوش مصنوعی ---------- */
 .gallery-theme { margin-bottom: 48px; }
 .gallery-theme:last-child { margin-bottom: 0; }
@@ -554,6 +575,11 @@ a:focus-visible, button:focus-visible {
         <li><span class="fact-list__marker">→</span> <span data-i18n="future-1">ساخت یه ایجنت هوش مصنوعی ساده برای انجام خودکار یه کار</span></li>
         <li><span class="fact-list__marker">→</span> <span data-i18n="future-2">ساخت یه ابزار اتوماسیون با هوش مصنوعی</span></li>
       </ul>
+
+      <h3 class="subsection__title" style="margin-top: 40px;" data-i18n="video-title">ویدیوی من</h3>
+      <div class="video-frame">
+        <div id="78677129400"><script type="text/JavaScript" src="https://www.aparat.com/embed/wzhxou4?data[rnddiv]=78677129400&data[responsive]=yes&titleShow=true&recom=self"></script></div>
+      </div>
     </section>
 
   </main>
@@ -646,6 +672,7 @@ a:focus-visible, button:focus-visible {
         en: 'Building a simple AI agent to automate a task',
       },
       'future-2': { fa: 'ساخت یه ابزار اتوماسیون با هوش مصنوعی', en: 'Building an AI-powered automation tool' },
+      'video-title': { fa: 'ویدیوی من', en: 'My Video' },
       'footer-text': { fa: 'ساخته شده با ❤️ توسط علیرضا عیدزاده', en: 'Made with ❤️ by Alireza Eidzadeh' },
     };
 
